@@ -1,40 +1,106 @@
---initial setup
-yarn init -y
-yarn add express @prisma/client
+# Sample Node API
 
--- For development
-yarn add -D typescript @types/node @types/express prisma ts-node-dev
--- For tsconfig.json file
-npx typescript --init
-which typescript
--- To run the application
-"scripts": {
-"dev": "ts-nod-dev server.ts"
-},
+Sample API using Node, Prisma and Postgresql.
 
--- Instalattion for prisma
-npx prisma init
+## Tech Stack
 
-### What is prisma? ORM
+**Server:** Node, Express, Prisma, PostgreSQL
 
-prisma.io/doc
+## Installation
 
-- a way to intereact with our database
-- completely type safe
-  Where is prisma best used? (server side)
-- node / serverles API (next.js api routes)
+Install main libraries with yarn
 
-Let get a database!
+```bash
+  yarn init -y
+  yarn add express @prisma/client
 
-### Migration
+```
 
-- fill schema
+Install development related packages:
 
-* Migration commands
+```bash
+  yarn add -D typescript @types/node @types/express prisma ts-node-dev
 
-- npx prisma migrate dev
+```
+
+For tsconfig.json file
+
+```bash
+  npx typescript --init
+  which typescript
+```
+
+For prisma initialization:
+
+```bash
+  npx prisma init
+```
+
+Prisma Migration commands:
+
+```bash
+  npx prisma migrate dev
   ? Enter a name for the new migration: init
-  --
+```
 
-* Prisma UI studio
+Prisma UI studio:
+
+```bash
   npx prisma studio
+```
+
+To run the node server:
+
+```bash
+ "scripts": {
+  "dev": "ts-nod-dev server.ts"
+ },
+
+```
+
+## API Reference
+
+#### Get all jokes
+
+```http
+  GET /
+  example: http://127.0.0.1:3000/
+           http://127.0.0.1:3000/?joke_id=ckph6po9l0000hse5sdrtby89
+
+```
+
+#### Get joke by id
+
+```http
+  GET /:joke_id
+
+  example: http://127.0.0.1:3000/ckph6po9l0000hse5sdrtby89
+```
+
+| Parameter | Type     | Description                            |
+| :-------- | :------- | :------------------------------------- |
+| `joke_id` | `string` | **Required**. joke_id of joke to fetch |
+
+#### Save joke
+
+```http
+  POST /
+  example: http://127.0.0.1:3000
+
+  {
+      text: "Joke ...",
+      userId: "ckph6oqz700007ge5ia5d2klp",
+  },
+```
+
+#### Remove a joke
+
+```http
+  DELETE /
+  example: http://127.0.0.1:3000/ckph6po9l0000hse5sdrtby89
+
+```
+
+| Parameter | Type     | Description                            |
+| :-------- | :------- | :------------------------------------- |
+| `joke_id` | `string` | **Required**. joke_id of joke to fetch |
