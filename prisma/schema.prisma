@@ -1,0 +1,26 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// DATABASE MODELING
+
+// jokes
+model Joke {
+  id String @id @default(cuid())
+  text String @db.Text
+  creator User @relation(fields: [userId], references:[id])
+  userId String
+}
+
+//user
+model User{
+  id String @id @default(cuid())
+  name String
+  jokes Joke[]
+}
+
